@@ -1,17 +1,30 @@
 ﻿double feet = 0;
 
-if (args.Length < 1 || args[0] == "-tom")
+
+if(args.Length >= 3
+              &&int.TryParse(args[1], out int start)
+                && int.TryParse(args[2], out int end))
 {
-    PrintMeterToFeetList(10, 30); //メートルへ変換
-}
-else if (args.Length < 1 || args[0] == "-tof")
-{
-    PrintFeetToMeterList(5, 15); //フィートへ変換
+
+
+    if (args[0] == "-tom")
+    {
+        PrintMeterToFeetList(start, end); //メートルへ変換
+    }
+    else if (args[0] == "-tof")
+    {
+        PrintFeetToMeterList(start, end); //フィートへ変換
+    }
+    else
+    {
+        Console.WriteLine("引数エラー");
+    }
 }
 else
 {
-    Console.WriteLine("引数エラー");
+    Console.WriteLine("エラー");
 }
+
 
 void PrintMeterToFeetList(int start, int end)
 {
