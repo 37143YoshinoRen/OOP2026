@@ -2,11 +2,11 @@
 
 if (args.Length < 1 || args[0] == "-tom")
 {
-    PrintMeterToFeetList(1, 10); //メートルへ変換
+    PrintMeterToFeetList(10, 30); //メートルへ変換
 }
 else if (args.Length < 1 || args[0] == "-tof")
 {
-    PrintFeetToMeterList(1, 10); //フィートへ変換
+    PrintFeetToMeterList(5, 15); //フィートへ変換
 }
 else
 {
