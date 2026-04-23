@@ -39,8 +39,8 @@ static void PrintFeetToMeterList(int start, int end)
 }
 static void PrintMeterToFeetList(int start, int end)
 {
-    
-    //フィートからメートルへの対応表を出力
+
+    //メートルからフィートへの対応表を出力
     for (int meter = start; meter <= end; meter++)
     {
         double feet = FeetConverter.FromMeter(meter);
