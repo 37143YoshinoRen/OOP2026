@@ -1,4 +1,6 @@
-﻿double feet = 0;
+﻿using DistanceConverter;
+
+double feet = 0;
 
 
 if(args.Length >= 3
@@ -25,33 +27,24 @@ else
     Console.WriteLine("エラー");
 }
 
-
-void PrintMeterToFeetList(int start, int end)
-{
-    //フィートからメートルへの対応表を出力
-    for (int meter = start; meter <= end; meter++)
-    {
-        double feet = MeterToFeet(meter);
-        Console.WriteLine($"{meter}m = {feet:0.0000}ft");
-    }
-}
 void PrintFeetToMeterList(int start, int end)
 {
+    FeetConverter converter = new FeetConverter();
     //フィートからメートルへの対応表を出力
     for (int feet = start; feet <= end; feet++)
     {
-        double meter = FeetToMeter(feet);
+        double meter = converter.ToMeter(feet);
         Console.WriteLine($"{feet}ft = {meter:0.0000}m");
     }
 }
-//フィートからメートルを求める
-double FeetToMeter(int fett)
+void PrintMeterToFeetList(int start, int end)
 {
-    //feet * 0.3048
-    return feet * 0.3048;
+    FeetConverter converter = new FeetConverter();
+    //フィートからメートルへの対応表を出力
+    for (int meter = start; meter <= end; meter++)
+    {
+        double feet = converter.FromMeter(meter);
+        Console.WriteLine($"{meter}m = {feet:0.0000}ft");
+    }
 }
-//メートルからフィートを求める
-double MeterToFeet(int meter)
-{
-    return meter / 0.3048;
-}
+
