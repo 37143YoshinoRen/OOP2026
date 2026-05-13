@@ -14,7 +14,5 @@ namespace Exercise02 {
                     Console.WriteLine($"{feet}ft = {meter:00.0000}m");
                 }
             }
-
-
         }
     }
