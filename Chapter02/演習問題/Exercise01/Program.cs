@@ -3,25 +3,28 @@
         static void Main(string[] args) {
 
             var songs = new List<Song>();
-
+            while (true) { 
             //"アーティスト名："出力
-            Console.Write("曲名");
+            Console.WriteLine("曲名");
             string? title = Console.ReadLine();
 
+            if (title.Equals("end", StringComparison.OrdinalIgnoreCase))
+                    break;
+
             Console.Write("アーティスト名");
-            string? srtistname = Console.ReadLine();
+            string? artistname = Console.ReadLine();
 
             Console.Write("演奏時間（秒）：");
-            int length = Console.Read();
+            int length = int.Parse(Console.ReadLine());
 
-            Console.ReadLine(); //バッファリング
-
-            Song song = new Song(title, srtistname, length);
+            Song song = new Song(title, artistname, length);
 
             songs.Add(song);
 
-            
+            Console.WriteLine();
+            }
             PrintSongs(songs);
+            
         }
 
         private static void PrintSongs(List<Song> songs) {
