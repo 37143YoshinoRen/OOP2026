@@ -27,22 +27,16 @@ else
     Console.WriteLine("エラー");
 }
 
-static void PrintFeetToMeterList(int start, int end)
-{
-    
+static void PrintFeetToMeterList(int start, int end){
     //フィートからメートルへの対応表を出力
-    for (int feet = start; feet <= end; feet++)
-    {
+for (int feet = start; feet <= end; feet++){
         double meter = FeetConverter.ToMeter(feet);
         Console.WriteLine($"{feet}ft = {meter:0.0000}m");
     }
 }
-static void PrintMeterToFeetList(int start, int end)
-{
-
+static void PrintMeterToFeetList(int start, int end){
     //メートルからフィートへの対応表を出力
-    for (int meter = start; meter <= end; meter++)
-    {
+    for (int meter = start; meter <= end; meter++){
         double feet = FeetConverter.FromMeter(meter);
         Console.WriteLine($"{meter}m = {feet:0.0000}ft");
     }

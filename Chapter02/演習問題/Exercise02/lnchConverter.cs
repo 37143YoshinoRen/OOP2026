@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace Exercise02 {
     public class lnchConverter {
-        public class FeetConverter {
-            private static readonly double ratio = 0.3048;
+        public class InchConverter {
+            private static readonly double ratio = 0.0254;
 
+            //メートルからインチを求める
+            public static double FromMeter(double meter) {
+                //feet * 0.0254
+                return meter / ratio;
+            }
+
+            //インチからメートルを求める
+            public static double ToMeter(int inch) {
+                return inch * ratio;
+            }
 
         }
     }
