@@ -34,6 +34,7 @@ namespace Exercise01 {
                 Console.WriteLine(s / 2);
             }
         }
+        //回答 numbers.ForEach(n => Console.WriteLine(n /2.0));
 
         private static void Exercise3(List<int> numbers) {
             var query = numbers.Where(s => s >= 50).ToList();
@@ -41,11 +42,12 @@ namespace Exercise01 {
                 Console.WriteLine(item);
             }
         }
+        //または numbers.Where(n=>n>50).ToList().ForEach(n=>Console.WriteLine(n));
 
         private static void Exercise4(List<int> numbers) {
             var query = numbers.Select(s => s * 2);
             foreach (var item in query)    
             Console.WriteLine(item);
             }
-        }
+        }// numbers.Select(n => n * 2).ToList().ForEach(s => s * 2));
     }
