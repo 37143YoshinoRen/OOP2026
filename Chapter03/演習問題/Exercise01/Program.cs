@@ -23,7 +23,10 @@ namespace Exercise01 {
 
         private static void Exercise1(List<int> numbers) {
             var query = numbers.Exists(s => s % 8 == 0 || s % 9 == 0);
-            Console.WriteLine(query); 
+            if(query)
+                Console.WriteLine("存在しています");
+            else
+                Console.WriteLine("存在していません");
         }
 
         private static void Exercise2(List<int> numbers) {
