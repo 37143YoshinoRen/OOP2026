@@ -22,29 +22,29 @@ namespace Section04 {
             Console.WriteLine(message);
 
             #endregion
-        }
 
-        #region null 合体代入演算子
 
-        message == null;
-        message ?? = DefaultMessage();
+            #region null 合体代入演算子
 
-        #endregion
+            message = null;
+            message ?? = DefaultMessage();
 
-        #region null条件演算子
+            #endregion
 
-        Sale? sale = new Sale {
-            ShopName = "新宿店",
-            ProductCategory = "洋菓子",
-            Amount = 523100
-        };
-        sale = null;
+            #region null条件演算子
 
-        int? amount = sale?.Amount;
-        Console.WriteLine("売上高：" + amount);
+            Sale? sale = new Sale {
+                ShopName = "新宿店",
+                ProductCategory = "洋菓子",
+                Amount = 523100
+            };
+            sale = null;
 
-        #endregion
-            
+            int? amount = sale?.Amount;
+            Console.WriteLine("売上高：" + amount);
+
+            #endregion
+        }   
         private static string? DefaultMessage() {
             return "DefaultMassage";
         }
