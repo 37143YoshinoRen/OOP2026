@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\売上集計プログラム\SalesCalculator\SalesCalculator.csproj" />
+  </ItemGroup>
+
 </Project>
