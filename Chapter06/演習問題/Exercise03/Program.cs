@@ -66,7 +66,6 @@ namespace Exercise03 {
 
             //var dict = new SortedDictionary<char, int>();
             foreach(var c in str) {
-                if (alphDicCount.ContainsKey(c))
                     alphDicCount[c]++;　　//登録されている場合
             }
             foreach (var word in alphDicCount) {
