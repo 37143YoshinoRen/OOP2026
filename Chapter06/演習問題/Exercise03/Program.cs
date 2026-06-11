@@ -1,4 +1,6 @@
 ﻿
+using System.Data.SqlTypes;
+
 namespace Exercise03 {
     internal class Program {
         static void Main(string[] args) {
@@ -56,7 +58,24 @@ namespace Exercise03 {
         }
 
         private static void Exercise6(string text) {
-            
+            var str = text.ToLower().Replace("", "");
+
+            //辞書（ディクショナリ）を使った集計
+            //var alphDicCount = Enumerable.Range('a', 26);
+            //  ToDictionary(num => ((char)num).ToString(), NotFiniteNumberException => 0);
+
+            var dict = new SortedDictionary<char, int>();
+            foreach(var c in str) {
+                if (dict.ContainsKey(c))
+                    dict[c]++;　　//登録されている場合
+                eles
+                    dict[c] = 1;  //未登録の場合
+            }
+            foreach (var word in dict) {
+                foreach(var word in dict) {
+                    Console.WriteLine(word.Key + ":" + word.Value);
+                }
+            }
         }
     }
 }
