@@ -7,7 +7,7 @@ namespace Section05 {
             Console.WriteLine(result);
         }
             
-            //    var sb = new StringBuilder();
+        //    var sb = new StringBuilder();
         //    foreach(var word in GetWords()) {
         //        sb.Append(word);
         //    }

@@ -1,5 +1,7 @@
 ﻿
 using System.Data.SqlTypes;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Exercise03 {
     internal class Program {
@@ -43,7 +45,20 @@ namespace Exercise03 {
         }
 
         private static void Exercise3(string text) {
-            
+            var array = text.Split(' ');
+            var sb = StringBuilder(array[0]);
+
+            //var ab = new StringBuilder();
+            //sb.Append(array[0]);
+            //for(int i = 1;i < array.Length; i++) {
+            //    sb.Append(' ');
+            //    sbyte.Append(array[i]);
+            //}
+
+            foreach(var word in array.Skip(1)) {
+                sb.Append(' ');
+                sb.Append(word);
+            }
         }
 
         private static void Exercise4(string text) {
@@ -58,7 +73,7 @@ namespace Exercise03 {
         }
 
         private static void Exercise6(string text) {
-            var str = text.ToLower().Replace("", "");
+            var str = text.ToLower().Replace(" ", "");
 
             //辞書（ディクショナリ）を使った集計
             var alphDicCount = Enumerable.Range('a', 26).
