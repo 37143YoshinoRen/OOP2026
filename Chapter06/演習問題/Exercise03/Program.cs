@@ -48,7 +48,8 @@ namespace Exercise03 {
             var array = text.Split(' ');
             var sb = StringBuilder(array[0]);
 
-            //var ab = new StringBuilder();
+            //for文を使う例
+            //var sb = new StringBuilder();
             //sb.Append(array[0]);
             //for(int i = 1;i < array.Length; i++) {
             //    sb.Append(' ');
