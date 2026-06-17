@@ -4,14 +4,10 @@ namespace Exercise04 {
     internal class Program {
         static void Main(string[] args) {
             var line = "Novelist=谷崎潤一郎;BestWork=春琴抄;Born=1886";
-            var str = line.Split(',','=');
-            ToJapanese("Novelist");
-            ToJapanese("BestWork");
-            ToJapanese("Born");
-            var re = String.Join(str);
-
-
-
+            foreach (var str in line.Split(';')) {
+                var word = str.Split('=');
+                Console.WriteLine($"{ToJapanese(word[0])}:{word[1]}");
+            }
 
         }
         static string ToJapanese(string key) {
