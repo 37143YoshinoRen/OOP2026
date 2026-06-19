@@ -38,7 +38,9 @@ namespace Exercise01 {
         }
 
         private static void Exercise4(int[] numbers) {
-         
+            var b = numbers.Order().Take(3);
+            foreach (var i in b)
+                Console.WriteLine(i);
         }
 
         private static void Exercise5(object number) {
