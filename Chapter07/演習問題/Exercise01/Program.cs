@@ -1,4 +1,5 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Globalization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Exercise01 {
     internal class Program {
@@ -23,36 +24,40 @@ namespace Exercise01 {
         }
 
         private static void Exercise1(int[] numbers) {
-            var maxNumber = numbers.Max();
-            Console.WriteLine(maxNumber);
+            Console.WriteLine(numbers.Max());
         }
 
         private static void Exercise2(int[] numbers) {
-            var number = numbers.Skip(9);
-            foreach (var n in number)
+            foreach (var n in numbers.TakeLast(2)) {
                 Console.WriteLine(n);
+            }
         }
 
         private static void Exercise3(int[] numbers) {
-         
+            //p173
+            var strings = numbers.Select(n => n.ToString("000"));
+            foreach (var s in strings) {
+                Console.WriteLine(s);
+            }
         }
 
         private static void Exercise4(int[] numbers) {
-            var b = numbers.Order().Take(3);
-            foreach (var i in b)
-                Console.WriteLine(i);
+            foreach(var n in numbers.Order().Take(3)) {
+                Console.WriteLine(n);
+            }
         }
 
-        private static void Exercise5(object number) {
-         
+        private static void Exercise5(int[] numbers) {
+            var count = numbers.Distinct().Count(n => 10 < n);
+            Console.WriteLine(count);
         }
 
-        
 
-        
 
-       
 
-        
+
+
+
+
     }
 }
