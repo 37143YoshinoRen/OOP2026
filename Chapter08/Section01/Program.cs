@@ -1,4 +1,6 @@
-﻿namespace Section01 {
+﻿using System.ComponentModel;
+
+namespace Section01 {
     internal class Program {
         static private Dictionary<string, string> prefOfficeDict = new Dictionary<string, string>();
 
@@ -22,7 +24,13 @@
                 if (prefCaptalLocation == null) break; //無限ループを抜ける(Ctrl + 'Z')
                 //3,県庁所在地登録処理
                 prefOfficeDict.Add(pref, prefCaptalLocation);
-                
+                if (Contains) {
+                    Console.Write("上書きしますか？(Y/N):");
+                    var YN = Console.ReadLine();
+                        if (YN == Y) {
+                        prefOfficeDict[pref] = prefCaptalLocation;
+                    }
+                }
             }
 
             while (true) {
