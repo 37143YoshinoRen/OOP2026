@@ -1,4 +1,6 @@
 ﻿
+using System.Linq;
+
 namespace Exercise01 {
     internal class Program {
         static void Main(string[] args) {
@@ -10,6 +12,9 @@ namespace Exercise01 {
         }
 
         private static void Exercise2(string text) {
+            var dict = new Dictionary<char, int>();
+            
+            dict[dict.Keys] = dict.Values;
 
         }
 
