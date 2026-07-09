@@ -41,13 +41,29 @@ namespace Section01 {
                 }
                 return age;
             }
-        
-        //w’è‚µ‚½“ú‚ª‘æ‰½T‚©‹‚ß‚é
-        static int NthWeek(DateTime date) {
+
+            //w’è‚µ‚½“ú‚ª‘æ‰½T‚©‹‚ß‚é
+            static int NthWeek(DateTime date) {
                 var firstDay = new DateTime(date.Year, date.Month, 1);
                 var firstDayOfWeek = (int)(firstDay.DayOfWeek);
                 return (date.Day + firstDayOfWeek - 1) / 7 + 1;
             }
+
+            //¡”N‚Ì’a¶“ú‚ğì¬
+            DateTime thisYearBirthday = new DateTime(today.Year, birth.Month, birth.Day);
+            //Šù‚É‚É’a¶“ú‚ª‰ß‚¬‚½‚©H
+            if (thisYearBirthday < today) {
+                //—ˆ”N‚Ì’a¶“ú‚ğì¬‚·‚é
+                thisYearBirthday = thisYearBirthday.AddYears(1);
+            }
+            var span = thisYearBirthday - today;
+
+            if (span.Days == 0) {
+                tbOut4.Text = "’a¶“ú‚Í¡“ú‚Å‚·";
+            } else {
+                tbOut4.Text = $"’a¶“ú‚Ü‚Å‚ ‚Æ{span.Days}“ú‚Å‚·";
+            }
         }
     }
 }
+
