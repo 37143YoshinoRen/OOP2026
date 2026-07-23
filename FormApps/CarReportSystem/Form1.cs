@@ -3,6 +3,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing.Text;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 using static CarReportSystem.CarReport;
 
 namespace CarReportSystem {
@@ -10,6 +12,9 @@ namespace CarReportSystem {
 
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
+
+        //設定クラスのオブジェクトを作成
+        Settings settings = new Settings();
 
         public Form1() {
             InitializeComponent();
@@ -44,7 +49,7 @@ namespace CarReportSystem {
 
             dgyRecords.ClearSelection();  //セルの選択を解除する
             ImputItemsUpdete();
-            
+
         }
         private MakerGroup GetRadioButtonMaker() {
             if (rbToyota.Checked)
@@ -144,19 +149,19 @@ namespace CarReportSystem {
         }
 
         private void ImputItemsUpdete() {
-            if (!dgyRecords.CurrentRow.Selected) {  
+            if (!dgyRecords.CurrentRow.Selected) {
                 ImputItemsUpdete();
             }
         }
 
         private void btModify_Click(object sender, EventArgs e) {
 
-            if(dgyRecords.SelectedRows.Count == 0) {
+            if (dgyRecords.SelectedRows.Count == 0) {
                 tsslbMassage.Text = "修正するレポートを提出してください";
                 return;
             }
 
-            if (String.IsNullOrWhiteSpace(cbAuthor.Text) 
+            if (String.IsNullOrWhiteSpace(cbAuthor.Text)
                 || String.IsNullOrWhiteSpace(cbCarName.Text)) {
                 tsslbMassage.Text = "記録者、または車名が未入力です。";  //メッセージ領域のクリア
                 return;
@@ -197,10 +202,18 @@ namespace CarReportSystem {
         }
 
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
-            cdColor.ShowDialog() == DialogResult.OK){  
+           if (cdColor.ShowDialog() == DialogResult.OK){ 
             BackColor = cdColor.Color;
+            }
         }
-    }
+
+        //フォームが閉じたら呼ばれるイベントハンドラー
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            using(var writer = XmlWriter.Create("settings.xml")) {
+                var serializer = new XmlSerializer(settings.GetType());
+                serializer.Serialize(writer, settings);
+            }
+        }
     }
 }
 
