@@ -63,6 +63,7 @@
             tsslb = new ToolStripStatusLabel();
             tsslbMassage = new ToolStripStatusLabel();
             ofdPicFileOpen = new OpenFileDialog();
+            cdColor = new ColorDialog();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgyRecords).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPicture).BeginInit();
@@ -391,6 +392,7 @@
             色設定ToolStripMenuItem.Name = "色設定ToolStripMenuItem";
             色設定ToolStripMenuItem.Size = new Size(163, 22);
             色設定ToolStripMenuItem.Text = "色設定...";
+            色設定ToolStripMenuItem.Click += 色設定ToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
@@ -402,6 +404,7 @@
             終了ToolStripMenuItem.Name = "終了ToolStripMenuItem";
             終了ToolStripMenuItem.Size = new Size(163, 22);
             終了ToolStripMenuItem.Text = "終了(&X)     Alt+F4";
+            終了ToolStripMenuItem.Click += 終了ToolStripMenuItem_Click;
             // 
             // ヘルプHToolStripMenuItem
             // 
@@ -439,6 +442,10 @@
             // ofdPicFileOpen
             // 
             ofdPicFileOpen.FileName = "openFileDialog1";
+            // 
+            // cdColor
+            // 
+            cdColor.Color = Color.FromArgb(128, 255, 255);
             // 
             // Form1
             // 
@@ -526,5 +533,6 @@
         private ToolStripStatusLabel tsslb;
         private ToolStripStatusLabel tsslbMassage;
         private OpenFileDialog ofdPicFileOpen;
+        private ColorDialog cdColor;
     }
 }

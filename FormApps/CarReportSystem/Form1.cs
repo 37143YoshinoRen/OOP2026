@@ -2,6 +2,7 @@ using Microsoft.VisualBasic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing.Text;
+using System.Windows.Forms;
 using static CarReportSystem.CarReport;
 
 namespace CarReportSystem {
@@ -39,9 +40,9 @@ namespace CarReportSystem {
             //履歴登録
             SetCbAuthor(cbAuthor.Text);
             SetCbCarName(cbCarName.Text);
-            dgyRecords.CurrentRow.Selected = false;  //選択解除
+            dgyRecords.CurrentRow.Selected = false; //選択解除
             ImputItemsUpdete();
-            
+
         }
         private MakerGroup GetRadioButtonMaker() {
             if (rbToyota.Checked)
@@ -67,7 +68,7 @@ namespace CarReportSystem {
         }
 
         private void btNewInput_Click(object sender, EventArgs e) {
-         
+
             dtpDate.Value = DateTime.Today;
             cbAuthor.Text = String.Empty;
             rbOther.Checked = true;
@@ -80,7 +81,7 @@ namespace CarReportSystem {
 
         private void dgyRecords_Click(object sender, EventArgs e) {
 
-            //if ((dgyRecords.CurrentRow is null) || (!dgyRecords.CurrentRow.Selected)) return;
+            //if (dgyRecords.CurrentRow is null) || (!dgyRecords.CurrentRow.Selected)) return;
 
             //dtpDate.Value = (DateTime)dgyRecords.CurrentRow.Cells["Date"].Value;
             //cbAuthor.Text = (string)dgyRecords.CurrentRow.Cells["Author"].Value;
@@ -141,10 +142,10 @@ namespace CarReportSystem {
         }
 
         private void ImputItemsUpdete() {
-            if (!dgyRecords.CurrentRow.Selected)
+            if (!dgyRecords.CurrentRow.Selected) {
                 ImputItemsUpdete();
+            }
         }
-
         private void btModify_Click(object sender, EventArgs e) {
             listCarReports[dgyRecords.CurrentRow.Index].Date = dtpDate.Value;
             listCarReports[dgyRecords.CurrentRow.Index].Author = cbAuthor.Text;
@@ -167,6 +168,14 @@ namespace CarReportSystem {
             pbPicture.Image = (Image)dgyRecords.CurrentRow.Cells["picture"].Value;
 
             ImputItemsUpdete();  //データグリットビューを更新したら呼ぶメソッド
+        }
+
+        private void 終了ToolStripMenuItem_Click(object sender, EventArgs e) {
+            Application.Exit();
+        }
+
+        private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            BackColor = cdColor.Color;
         }
     }
 }
