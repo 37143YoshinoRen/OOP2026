@@ -28,21 +28,23 @@ namespace CarReportSystem {
 
             var carReport = new CarReport {
                 Date = dtpDate.Value,
-                Author = cbAuthor.Text,
+                Author = cbAuthor.Text.Trim(),
                 Maker = GetRadioButtonMaker(),
-                CarName = cbCarName.Text,
+                CarName = cbCarName.Text.Trim(),
                 Report = tbReport.Text,
                 picture = pbPicture.Image,
 
             };
             listCarReports.Add(carReport);
 
-            //履歴登録
-            SetCbAuthor(cbAuthor.Text);
-            SetCbCarName(cbCarName.Text);
-            dgyRecords.CurrentRow.Selected = false; //選択解除
-            ImputItemsUpdete();
 
+            //履歴登録
+            SetCbAuthor(cbAuthor.Text.Trim());
+            SetCbCarName(cbCarName.Text.Trim());
+
+            dgyRecords.ClearSelection();  //セルの選択を解除する
+            ImputItemsUpdete();
+            
         }
         private MakerGroup GetRadioButtonMaker() {
             if (rbToyota.Checked)
@@ -76,7 +78,7 @@ namespace CarReportSystem {
             tbReport.Text = String.Empty;
             pbPicture.Image = null;
 
-            dgyRecords.CurrentRow.Selected = false;
+            dgyRecords.ClearSelection();  //セルの選択を解除する
         }
 
         private void dgyRecords_Click(object sender, EventArgs e) {
@@ -142,30 +144,50 @@ namespace CarReportSystem {
         }
 
         private void ImputItemsUpdete() {
-            if (!dgyRecords.CurrentRow.Selected) {
+            if (!dgyRecords.CurrentRow.Selected) {  
                 ImputItemsUpdete();
             }
         }
+
         private void btModify_Click(object sender, EventArgs e) {
+
+            if(dgyRecords.SelectedRows.Count == 0) {
+                tsslbMassage.Text = "修正するレポートを提出してください";
+                return;
+            }
+
+            if (String.IsNullOrWhiteSpace(cbAuthor.Text) 
+                || String.IsNullOrWhiteSpace(cbCarName.Text)) {
+                tsslbMassage.Text = "記録者、または車名が未入力です。";  //メッセージ領域のクリア
+                return;
+            }
+
             listCarReports[dgyRecords.CurrentRow.Index].Date = dtpDate.Value;
-            listCarReports[dgyRecords.CurrentRow.Index].Author = cbAuthor.Text;
+            listCarReports[dgyRecords.CurrentRow.Index].Author = cbAuthor.Text.Trim();
             listCarReports[dgyRecords.CurrentRow.Index].Maker = GetRadioButtonMaker();
-            listCarReports[dgyRecords.CurrentRow.Index].CarName = cbCarName.Text;
+            listCarReports[dgyRecords.CurrentRow.Index].CarName = cbCarName.Text.Trim();
             listCarReports[dgyRecords.CurrentRow.Index].Report = tbReport.Text;
             listCarReports[dgyRecords.CurrentRow.Index].picture = pbPicture.Image;
 
+            SetCbAuthor(cbAuthor.Text.Trim());
+            SetCbAuthor(cbCarName.Text.Trim());
+
             dgyRecords.Refresh();  //データグリットビューの更新
+            tsslbMassage.Text = "レポート修正しました";
         }
 
         private void dgyRecords_SelectionChanged(object sender, EventArgs e) {
-            if ((dgyRecords.CurrentRow is null) || (!dgyRecords.CurrentRow.Selected)) return;
+            if ((dgyRecords.CurrentRow?.DataBoundItem is not CarReport carReport)
+                    || (!dgyRecords.CurrentRow.Selected)) return;
 
-            dtpDate.Value = (DateTime)dgyRecords.CurrentRow.Cells["Date"].Value;
-            cbAuthor.Text = (string)dgyRecords.CurrentRow.Cells["Author"].Value;
-            SetRadioButtonMaker((MakerGroup)dgyRecords.CurrentRow.Cells["Maker"].Value);
-            cbCarName.Text = (string)dgyRecords.CurrentRow.Cells["CarName"].Value;
-            tbReport.Text = (string)dgyRecords.CurrentRow.Cells["Report"].Value;
-            pbPicture.Image = (Image)dgyRecords.CurrentRow.Cells["picture"].Value;
+
+
+            dtpDate.Value = carReport.Date;
+            cbAuthor.Text = carReport.Author;
+            SetRadioButtonMaker(carReport.Maker);
+            cbCarName.Text = carReport.CarName;
+            tbReport.Text = carReport.Report;
+            pbPicture.Image = carReport.picture;
 
             ImputItemsUpdete();  //データグリットビューを更新したら呼ぶメソッド
         }
@@ -175,8 +197,10 @@ namespace CarReportSystem {
         }
 
         private void 色設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            cdColor.ShowDialog() == DialogResult.OK){  
             BackColor = cdColor.Color;
         }
+    }
     }
 }
 

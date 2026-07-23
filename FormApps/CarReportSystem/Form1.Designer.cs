@@ -246,7 +246,6 @@
             dgyRecords.Size = new Size(719, 160);
             dgyRecords.TabIndex = 4;
             dgyRecords.SelectionChanged += dgyRecords_SelectionChanged;
-            dgyRecords.Click += dgyRecords_Click;
             // 
             // tbReport
             // 
