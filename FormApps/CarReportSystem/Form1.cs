@@ -39,6 +39,9 @@ namespace CarReportSystem {
             //履歴登録
             SetCbAuthor(cbAuthor.Text);
             SetCbCarName(cbCarName.Text);
+            dgyRecords.CurrentRow.Selected = false;  //選択解除
+            ImputItemsUpdete();
+            
         }
         private MakerGroup GetRadioButtonMaker() {
             if (rbToyota.Checked)
@@ -64,9 +67,7 @@ namespace CarReportSystem {
         }
 
         private void btNewInput_Click(object sender, EventArgs e) {
-            //    ImputItemsAllClear();
-            // }
-            // private void btnewInput Click() {
+         
             dtpDate.Value = DateTime.Today;
             cbAuthor.Text = String.Empty;
             rbOther.Checked = true;
@@ -74,18 +75,21 @@ namespace CarReportSystem {
             tbReport.Text = String.Empty;
             pbPicture.Image = null;
 
+            dgyRecords.CurrentRow.Selected = false;
         }
 
         private void dgyRecords_Click(object sender, EventArgs e) {
 
-            if (dgyRecords.CurrentRow is null) return;
+            //if ((dgyRecords.CurrentRow is null) || (!dgyRecords.CurrentRow.Selected)) return;
 
-            dtpDate.Value = (DateTime)dgyRecords.CurrentRow.Cells["Date"].Value;
-            cbAuthor.Text = (string)dgyRecords.CurrentRow.Cells["Author"].Value;
-            SetRadioButtonMaker((MakerGroup)dgyRecords.CurrentRow.Cells["Maker"].Value);
-            cbCarName.Text = (string)dgyRecords.CurrentRow.Cells["CarName"].Value;
-            tbReport.Text = (string)dgyRecords.CurrentRow.Cells["Report"].Value;
-            pbPicture.Image = (Image)dgyRecords.CurrentRow.Cells["picture"].Value;
+            //dtpDate.Value = (DateTime)dgyRecords.CurrentRow.Cells["Date"].Value;
+            //cbAuthor.Text = (string)dgyRecords.CurrentRow.Cells["Author"].Value;
+            //SetRadioButtonMaker((MakerGroup)dgyRecords.CurrentRow.Cells["Maker"].Value);
+            //cbCarName.Text = (string)dgyRecords.CurrentRow.Cells["CarName"].Value;
+            //tbReport.Text = (string)dgyRecords.CurrentRow.Cells["Report"].Value;
+            //pbPicture.Image = (Image)dgyRecords.CurrentRow.Cells["picture"].Value;
+
+            //ImputItemsUpdete();  //データグリットビューを更新したら呼ぶメソッド
         }
 
         private void SetRadioButtonMaker(MakerGroup targetMekar) {
@@ -124,16 +128,45 @@ namespace CarReportSystem {
                 cbCarName.Items.Add(carName);
         }
 
-        private void Form1_Load(object sender, EventArgs e) {
-
-        }
-
         private void btDeletePicture_Click(object sender, EventArgs e) {
             pbPicture.Image = null;
         }
 
         private void btDeleteRecord_Click(object sender, EventArgs e) {
-            listCarReports.RemoveAt();
+            if (dgyRecords.CurrentRow is null) return;
+            //選択されたインデックスを取得
+            //削除したいインデックスを選択して削除
+            listCarReports.RemoveAt(dgyRecords.CurrentRow.Index);
+            ImputItemsUpdete();
+        }
+
+        private void ImputItemsUpdete() {
+            if (!dgyRecords.CurrentRow.Selected)
+                ImputItemsUpdete();
+        }
+
+        private void btModify_Click(object sender, EventArgs e) {
+            listCarReports[dgyRecords.CurrentRow.Index].Date = dtpDate.Value;
+            listCarReports[dgyRecords.CurrentRow.Index].Author = cbAuthor.Text;
+            listCarReports[dgyRecords.CurrentRow.Index].Maker = GetRadioButtonMaker();
+            listCarReports[dgyRecords.CurrentRow.Index].CarName = cbCarName.Text;
+            listCarReports[dgyRecords.CurrentRow.Index].Report = tbReport.Text;
+            listCarReports[dgyRecords.CurrentRow.Index].picture = pbPicture.Image;
+
+            dgyRecords.Refresh();  //データグリットビューの更新
+        }
+
+        private void dgyRecords_SelectionChanged(object sender, EventArgs e) {
+            if ((dgyRecords.CurrentRow is null) || (!dgyRecords.CurrentRow.Selected)) return;
+
+            dtpDate.Value = (DateTime)dgyRecords.CurrentRow.Cells["Date"].Value;
+            cbAuthor.Text = (string)dgyRecords.CurrentRow.Cells["Author"].Value;
+            SetRadioButtonMaker((MakerGroup)dgyRecords.CurrentRow.Cells["Maker"].Value);
+            cbCarName.Text = (string)dgyRecords.CurrentRow.Cells["CarName"].Value;
+            tbReport.Text = (string)dgyRecords.CurrentRow.Cells["Report"].Value;
+            pbPicture.Image = (Image)dgyRecords.CurrentRow.Cells["picture"].Value;
+
+            ImputItemsUpdete();  //データグリットビューを更新したら呼ぶメソッド
         }
     }
 }

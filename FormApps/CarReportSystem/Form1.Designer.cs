@@ -244,6 +244,7 @@
             dgyRecords.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgyRecords.Size = new Size(719, 160);
             dgyRecords.TabIndex = 4;
+            dgyRecords.SelectionChanged += dgyRecords_SelectionChanged;
             dgyRecords.Click += dgyRecords_Click;
             // 
             // tbReport
@@ -328,6 +329,7 @@
             btModify.TabIndex = 7;
             btModify.Text = "修正";
             btModify.UseVisualStyleBackColor = true;
+            btModify.Click += btModify_Click;
             // 
             // btDeleteRecord
             // 
@@ -470,7 +472,6 @@
             MaximizeBox = false;
             Name = "Form1";
             Text = "試乗レポート管理システム";
-            Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgyRecords).EndInit();
