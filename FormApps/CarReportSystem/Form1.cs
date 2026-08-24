@@ -1,4 +1,6 @@
 using System.ComponentModel;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.AccessControl;
 using System.Xml;
 using System.Xml.Serialization;
 using static CarReportSystem.CarReport;
@@ -23,16 +25,18 @@ namespace CarReportSystem {
                 try {
                     var reader = XmlReader.Create("setting.xml");
                     var serializer = new XmlSerializer(typeof(Settings));
-                    var setting = serializer.Deserialize(reader) as Settings;
+                    settings = serializer.Deserialize(reader) as Settings;
+                    //背景色設定
                     BackColor = Color.FromArgb(settings.MainFormBackColor);
                 }
+
                 catch (Exception ex) {
                     tsslbMessage.Text = "設定ファイルの読み込みエラー";
                     MessageBox.Show(ex.Message);
                 }
             } else {
                 {
-                    tsslbMessage.Text = "設定ファイルがありません"; 
+                    tsslbMessage.Text = "設定ファイルがありません";
                 }
             }
         }
@@ -203,7 +207,7 @@ namespace CarReportSystem {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
 
-                settings.MainFormBackColor =  cdColor.Color.ToArgb() ;
+                settings.MainFormBackColor = cdColor.Color.ToArgb();
             }
         }
 
@@ -215,5 +219,67 @@ namespace CarReportSystem {
                 serializer.Serialize(writer, settings);
             }
         }
+
+        private void 保存ToolStripMenuItem_Click(object sender, EventArgs e) {
+            reportSaveFile();
+        }
+
+        private void 開くToolStripMenuItem_Click(object sender, EventArgs e) {
+            reportOpenFile();
+        }
+
+        //ファイルセーブ
+        private void reportSaveFile() {
+            if (sfdReportFileSave.ShowDialog() == DialogResult.OK) {
+                try {
+#pragma warning disable SYSLIB0011 
+                    var bf = new BinaryFormatter();
+#pragma warning disable SYSLIB0011
+                    using (FileStream fs = File.Open(
+                        sfdReportFileSave.FileName,
+                        FileMode.Create)) {
+
+                        bf.Serialize(fs, listCarReports);
+                    }
+                }
+                catch (Exception ex) {
+                    tsslbMessage.Text = "ファイル書き出しエラー";
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        //ファイルオープン
+        private void reportOpenFile() {
+            if (ofdfReportFileOpen.ShowDialog() == DialogResult.OK) {
+                try {
+#pragma warning disable SYSLIB0011
+                    var bf = new BinaryFormatter();
+#pragma warning disable SYSLIB0011
+                    using (FileStream fs = File.Open(
+                        ofdfReportFileOpen.FileName,// ファイル名
+                        FileMode.Open,　//ファイルモード
+                        FileAccess.Read　//アクセス
+                        )) {
+
+                        listCarReports = (BindingList<CarReport>)bf.Deserialize(fs);
+                        dgvRecords.DataSource = listCarReports;
+                    }
+                    //履歴を履歴をすべて消す
+                    cbAuthor.Items.Clear();
+                    cbCarName.Items.Clear();
+                    //履歴を履歴を再登録
+                    foreach (var report in listCarReports) {
+                        SetCbAuthor(report.Author);
+                        SetCbCarName(report.CarName);
+                    }
+                }
+                catch (Exception ex) {
+                    tsslbMessage.Text = "ファイル書き出しエラー";
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
     }
 }
+
