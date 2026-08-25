@@ -13,8 +13,6 @@ namespace CarReportSystem {
         //設定クラスのオブジェクトを生成
         Settings settings =  Settings._Instance;
 
-        
-
         public Form1() {
             InitializeComponent();
             dgvRecords.DataSource = listCarReports;
