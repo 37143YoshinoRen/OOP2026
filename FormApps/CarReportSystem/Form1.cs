@@ -11,7 +11,9 @@ namespace CarReportSystem {
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
 
         //設定クラスのオブジェクトを生成
-        Settings settings = new Settings();
+        Settings settings =  Settings._Instance;
+
+        
 
         public Form1() {
             InitializeComponent();
@@ -28,7 +30,7 @@ namespace CarReportSystem {
                         if (serializer.Deserialize(reader) is Settings loadedSettings) {
                             settings = loadedSettings;
                             //背景色設定
-                            BackColor = Color.FromArgb(settings.MainFormBackColor);
+                            BackColor = Color.FromArgb(Settings._Instance.MainFormBackColor);
                         }
                     }
                 }
@@ -219,7 +221,7 @@ namespace CarReportSystem {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
 
-                settings.MainFormBackColor = cdColor.Color.ToArgb();
+                Settings._Instance.MainFormBackColor = cdColor.Color.ToArgb();
             }
         }
 
@@ -227,8 +229,8 @@ namespace CarReportSystem {
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
 
             using (var writer = XmlWriter.Create("setting.xml")) {
-                var serializer = new XmlSerializer(settings.GetType());
-                serializer.Serialize(writer, settings);
+                var serializer = new XmlSerializer(Settings._Instance.GetType());
+                serializer.Serialize(writer, Settings._Instance);
             }
         }
 
