@@ -150,7 +150,12 @@ namespace CarReportSystem {
                 || (!dgvRecords.CurrentRow.Selected)) return;
 
             //削除したいインデックスを指定してリストから削除
-            listCarReports.RemoveAt(dgvRecords.CurrentRow.Index);
+            
+            if (dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
+                tsslbMessage.Text = "削除するレポートを選択してください";
+                return;
+            }
+            listCarReports.Remove(carReport);
 
             InputItemsUpdate(); //データグリッドビューを更新したら呼ぶメソッド
         }
@@ -169,6 +174,11 @@ namespace CarReportSystem {
             if (String.IsNullOrWhiteSpace(cbAuthor.Text)
                     || String.IsNullOrWhiteSpace(cbCarName.Text)) {
                 tsslbMessage.Text = "記録者、または車名が未入力です";
+                return;
+            }
+
+            if (dgvRecords.CurrentRow?.DataBoundItem is not CarReport carReport) {
+                tsslbMessage.Text = "修正するレポートを選択してください";
                 return;
             }
 
