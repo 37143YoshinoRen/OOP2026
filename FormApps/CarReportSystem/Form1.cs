@@ -23,13 +23,13 @@ namespace CarReportSystem {
 
             if (File.Exists("setting.xml")) {
                 try {
-                    var reader = XmlReader.Create("setting.xml");
-                    var serializer = new XmlSerializer(typeof(Settings));
-                    settings = serializer.Deserialize(reader) as Settings;
-                    //背景色設定
-                    BackColor = Color.FromArgb(settings.MainFormBackColor);
+                    using (var reader = XmlReader.Create("setting.xml")) {
+                        var serializer = new XmlSerializer(typeof(Settings));
+                        settings = serializer.Deserialize(reader) as Settings;
+                        //背景色設定
+                        BackColor = Color.FromArgb(settings.MainFormBackColor);
+                    }
                 }
-
                 catch (Exception ex) {
                     tsslbMessage.Text = "設定ファイルの読み込みエラー";
                     MessageBox.Show(ex.Message);
