@@ -38,7 +38,7 @@ namespace CarReportSystem {
             };
 
             using var writer = XmlWriter.Create(FileName);
-            var serializer = new XmlSerializer(typeof(Settings));
+            var serializer = new XmlSerializer(typeof(SettingsDate));
             serializer.Serialize(writer, date);
         }
     }
