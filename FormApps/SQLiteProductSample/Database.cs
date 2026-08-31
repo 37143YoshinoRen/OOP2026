@@ -30,6 +30,8 @@ public static class Database
 
         using var command = connection.CreateCommand();
 
+        //Productsテーブルを作るSQL
+        //IF NOT EXISTSにより、既にテーブルがあってもエラーにならない
         command.CommandText =
             """
             CREATE TABLE IF NOT EXISTS Products (
