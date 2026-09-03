@@ -101,7 +101,7 @@ public partial class Form1 : Form {
 
         //選択した商品のデータを入力欄へ表示する
         tbName.Text = product.Name;
-        tbPrice.Text = product.Price.ToString();
+        tbPrice.Text = product.Price.ToString();　
     }
 
     private void ReloadProducts() {
