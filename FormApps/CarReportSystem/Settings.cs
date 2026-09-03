@@ -5,7 +5,7 @@ namespace CarReportSystem {
     public class Settings {
 
         private const string FileName = "settings.xml";
-
+        //唯一のシングルトン
         private static Settings instance = new Settings();
 
         //メイン画面に設定した色情報
