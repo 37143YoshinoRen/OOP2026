@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -32,8 +33,7 @@ namespace CarReportSystem {
             while (reader.Read()) {
                 report.Add(new CarReport {
                     Id = reader.GetInt32(0),
-                    Date = DateTime.ParseExact(reader.GetString(1)
-                    ,
+                    Date = DateTime.ParseExact(reader.GetString(1),
                     "yyyy-MM-dd",
                     CultureInfo.InvariantCulture),
 
@@ -41,7 +41,8 @@ namespace CarReportSystem {
                     Maker = (CarReport.MakerGroup)reader.GetInt32(3),
                     CarName = reader.GetString(4),
                     Report = reader.GetString(5),
-                    //Picture = reader.GetString(6)
+                    Picture = reader.IsDBNull(6) ? null :
+                        BytesToImage(reader.GetFieldValue<byte[]>(6))
                 });
             }
             return report;
@@ -121,14 +122,22 @@ namespace CarReportSystem {
 
         }
 
+        // ImageをSQLiteへ保存できるbyte[]へ変換する
+        private static byte[]? ImageToBytes(Image? image) {
+            if (image is null) return null;
 
-
-        private static byte[]? ImageToByteArray(Image? image) {
-            if (image is null)
-                return null;
             using var stream = new MemoryStream();
-            image.Save(stream, image.RawFormat);
+            // DBへはPNG形式で保存
+            image.Save(stream, ImageFormat.Png);
             return stream.ToArray();
+        }
+
+        // SQLiteのBLOB（byte[]）をImageへ変換する
+        private static Image BytesToImage(byte[] data) {
+            using var stream = new MemoryStream(data);
+            using var image = Image.FromStream(stream);
+            // MemoryStream破棄後も利用できるようBitmapとしてコピーする。
+            return new Bitmap(image);
         }
     }
 }
