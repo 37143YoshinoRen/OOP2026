@@ -88,6 +88,7 @@ public class ProductRepository {
         if (command.ExecuteNonQuery() == 0)
             throw new InvalidOperationException("C³‘ÎÛ‚Ì¤•i‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
     }
+
     public void Delete(int id) {
         using var connection = Database.GetConnection();
         connection.Open();

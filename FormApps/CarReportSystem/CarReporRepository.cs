@@ -98,7 +98,7 @@ public class CarReporRepository {
         command.CommandText =
             """
                 UPDATE CarReports
-                SET Data = $date, Author = $author, Maker = $maker,
+                SET Date = $date, Author = $author, Maker = $maker,
                     CarName = $carName, Report = $report, Picture = $picture
                 WHERE Id = $id;
                 """;
@@ -117,6 +117,9 @@ public class CarReporRepository {
             pictureParameter.Value = pictureData;
         else
             pictureParameter.Value = DBNull.Value;
+
+        if (command.ExecuteNonQuery() == 0)
+            throw new InvalidOperationException("修正対象の商品が見つかりませんでした。");
     }
 
     //削除
