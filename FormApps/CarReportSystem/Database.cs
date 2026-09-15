@@ -5,18 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CarReportSystem
-{
+namespace CarReportSystem {
     public static class Database {
         private static readonly string DatabasePath =
-        Path.Combine(AppContext.BaseDirectory, "carreport.db");
+        　　Path.Combine(AppContext.BaseDirectory, "carreport.db");
 
         private static readonly string ConnectionString =
             $"Data Source={DatabasePath}";
 
-        public static SqliteConnection GetConnection() { 
-            return new SqliteConnection(ConnectionString);
-        }
+        public static SqliteConnection GetConnection()
+            => new SqliteConnection(ConnectionString);
+
         public static void Initialize() {
             //接続オブジェクトを生成する。
             using var connection = GetConnection();
@@ -26,22 +25,20 @@ namespace CarReportSystem
 
             using var command = connection.CreateCommand();
 
-            //Productsテーブルを作るSQL
+            //Carreportテーブルを作るSQL
             //IF NOT EXISTSにより、既にテーブルがあってもエラーにならない
             command.CommandText =
                 """
-            CREATE TABLE IF NOT EXISTS CarReports (
+                CREATE TABLE IF NOT EXISTS CarReports (
                 Id      INTEGER PRIMARY KEY AUTOINCREMENT,
-                Date    TEXT NOT NULL,
-                Author  TEXT NOT NULL,
-                Maker   TEXT NOT NULL,
-                CarName TEXT NOT NULL,
-                Report  TEXT NOT NULL,
-                Picture BLOB,
-            );
-            """;
-
-            //結果行を返さないSQLを実行する
+                Date    TEXT     NOT NULL,
+                Author  TEXT     NOT NULL,
+                Maker   INTEGER  NOT NULL,
+                CarName TEXT     NOT NULL,
+                Report  TEXT     NOT NULL,
+                Picture BLOB
+                );
+                """;
             command.ExecuteNonQuery();
         }
     }
