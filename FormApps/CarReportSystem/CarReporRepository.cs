@@ -83,7 +83,7 @@ public class CarReporRepository {
         var result = command.ExecuteScalar();
 
         if (result is null)
-            throw new InvalidOperationException("登録したレポートのIDが取得できませんでした。");
+            throw new InvalidOperationException("登録したレポートのIDが取得できませんでした");
 
         //SQLiteのINTEGERはlongとして返るため、intへ変換する
         return Convert.ToInt32(result);
