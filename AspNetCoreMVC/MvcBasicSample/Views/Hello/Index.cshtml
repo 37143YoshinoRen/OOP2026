@@ -1,8 +1,19 @@
 ﻿
 
+@*このViewがProductがたを受け取る宣言*@
+    @model List<MvcBasicSample.Models.Product>;
+
 @{
-    ViewData["TItle"] = "Hello";
+    ViewData["TItle"] = "商品情報";
+    int total = 0;
 }
 
-<h1>初めてのMVC</h1>
-<p>ControllerからViewが表示されました</p>
+<h1>商品情報</h1>
+<ul>
+@foreach (var product in Model){
+    <li>商品名:@product.Name</li>
+        total += product.Price;
+    
+}
+</ul>
+<p>合計金額 @total 円</p>
