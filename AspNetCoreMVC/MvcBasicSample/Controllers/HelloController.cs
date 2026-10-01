@@ -9,6 +9,18 @@ public class HelloController : Controller {
     // ../Hello/Indexで呼び出されるAction
     public IActionResult Index() {
         //商品１件のオブジェトを作る
-        return View();
+        var products = new List<Product> {
+            new Product {
+                Name = "ノート",
+                Price = 250
+                
+            },
+            new Product {
+                Name = "ペン",
+                Price = 150
+            }
+            
+        };
+        return View(products);
     }
 }
