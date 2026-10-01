@@ -5,15 +5,11 @@
 
 @{
     ViewData["TItle"] = "商品情報";
-    int total = 0;
+    string productName = "ノート";
+    int price = 250;
 }
 
+
 <h1>商品情報</h1>
-<ul>
-@foreach (var product in Model){
-    <li>商品名:@product.Name</li>
-        total += product.Price;
-    
-}
-</ul>
-<p>合計金額 @total 円</p>
+<p>商品名：@productName   </p>
+<p>価格 @price 円</p>
