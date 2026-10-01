@@ -11,16 +11,17 @@ public class HelloController : Controller {
         //商品１件のオブジェトを作る
         var products = new List<Product> {
             new Product {
-                Name = "ノート",
-                Price = 250
-                
+                Name = "ハンバーガー",
+                Price = 500
+
             },
             new Product {
-                Name = "ペン",
-                Price = 150
+                Name = "紅茶",
+                Price = 450
             }
-            
+
         };
         return View(products);
     }
 }
+
