@@ -1,32 +1,37 @@
-namespace MvcBasicSample {
-    public class Program {
-        public static void Main(string[] args) {
-            var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using MvcBasicSample.Data;
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+var builder = WebApplication.CreateBuilder(args);
 
-            var app = builder.Build();
+// ControllerとViewを使うMVCの機能を登録する 
+builder.Services.AddControllersWithViews();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment()) {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+// DefaultConnectionという名前の接続文字列を取得する 
+var connectionString = builder.Configuration
+    .GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("接続文字列がありません");
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+// AppDbContextを生成するときに使用するSQL Serverの接続設定を登録する 
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(connectionString));
+var app = builder.Build();
 
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            app.Run();
-        }
-    }
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment()) {
+    app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();
