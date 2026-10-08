@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;         // MVCの機能を使用 
 using Microsoft.EntityFrameworkCore;    // ToListAsyncを使用 
+using Microsoft.EntityFrameworkCore.Migrations;
 using MvcBasicSample.Data;              // AppDbContextを使用
 
 namespace MvcBasicSample.Controllers;
