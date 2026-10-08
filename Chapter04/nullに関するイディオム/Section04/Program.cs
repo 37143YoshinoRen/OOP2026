@@ -27,7 +27,7 @@ namespace Section04 {
             #region null 合体代入演算子
 
             message = null;
-            message ?? = DefaultMessage();
+           // message ?? == DefaultMessage();
 
             #endregion
 

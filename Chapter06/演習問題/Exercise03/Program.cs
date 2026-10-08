@@ -45,8 +45,8 @@ namespace Exercise03 {
         }
 
         private static void Exercise3(string text) {
-            var array = text.Split(' ');
-            var sb = StringBuilder(array[0]);
+            //var array = text.Split(' ');
+            //var sb = StringBuilder(array[0]);
 
             //for文を使う例
             //var sb = new StringBuilder();
@@ -56,11 +56,11 @@ namespace Exercise03 {
             //    sbyte.Append(array[i]);
             //}
 
-            foreach(var word in array.Skip(1)) {
-                sb.Append(' ');
-                sb.Append(word);
-            }
-        }
+        //    foreach(var word in array.Skip(1)) {
+        //        sb.Append(' ');
+        //        sb.Append(word);
+        //    }
+        //}
 
         private static void Exercise4(string text) {
             var count = text.Split(' ').Length;
