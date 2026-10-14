@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace SelfOrderSystem.Models {
     public class Product {
         public int Id { get; set; } //主キー
-        public int CategoruId { get; set; }
+        public int CategoryId { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -20,7 +20,7 @@ namespace SelfOrderSystem.Models {
         public string? ImagePath { get; set; } //商品画像URL
 
         public bool IsSoldOut { get; set; } //売り切れ
-        public bool IsActive { get; set; } //表示順
+        public bool IsActive { get; set; } = true; //表示順
 
         public Category? Category { get; set; } //所属カテゴリー
     }
