@@ -43,7 +43,7 @@ public class MenuController : Controller {
             Products = products,
             SelectedCategoryId = categoryId,
             CartItemCount = cartItems.Sum(x => x.Quantity),
-            CartTotal = cartItems.Sum(x=>x.LineTotal)
+            CartTotal = cartItems.Sum(x => x.LineTotal)
         };
 
         return View(vm);    // ViewModel をView へ渡す
