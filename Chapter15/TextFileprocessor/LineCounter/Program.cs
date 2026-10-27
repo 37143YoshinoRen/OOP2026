@@ -1,5 +1,6 @@
 ﻿using TextFileProcessor;
 
+
 string path = @"C:\Users\infosys\source\repos\OOP2026\Chapter14\演習問題\Exercise01_WPF\吾輩は猫である.txt";
 
 TextProcessor.Run<LineCounterProcessor>(path);
