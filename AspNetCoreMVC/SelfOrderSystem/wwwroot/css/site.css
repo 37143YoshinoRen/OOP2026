@@ -20,3 +20,138 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* AIデザイン演習用の追加スタイル */
+/* ===== ファンタジー風テーマ ===== */
+
+body {
+    background: linear-gradient( rgba(30, 20, 10, 0.85), rgba(15, 15, 25, 0.90) );
+    color: #f4e7c5;
+    font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+
+/* ===== ナビゲーション ===== */
+
+.navbar {
+    background: #3a2615 !important;
+    border-bottom: 3px solid #c9a44c;
+    box-shadow: 0 2px 15px rgba(201, 164, 76, 0.3);
+}
+
+.navbar-brand,
+.nav-link {
+    color: #f8e7b9 !important;
+}
+
+    .nav-link:hover {
+        color: #ffd700 !important;
+    }
+
+/* ===== ページタイトル ===== */
+
+.page-title {
+    color: #ffd700;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px #ffd700, 0 0 10px #a87000;
+    margin-bottom: 1.5rem;
+}
+
+/* ===== カード ===== */
+
+.card {
+    background: #4a3220;
+    border: 2px solid #c9a44c;
+    border-radius: 15px;
+    color: #f4e7c5;
+    box-shadow: 0 0 15px rgba(201, 164, 76, 0.3);
+}
+
+.card-header {
+    background: #5c3c25;
+    color: #ffd700;
+    font-weight: bold;
+    border-bottom: 1px solid #c9a44c;
+}
+
+/* ===== ボタン ===== */
+
+.btn-primary {
+    background: linear-gradient(#d8b15c, #9f7222);
+    border: none;
+    color: #2a1d0d;
+    font-weight: bold;
+}
+
+    .btn-primary:hover {
+        background: linear-gradient(#f4d37f, #bc882d);
+        color: #000;
+    }
+
+.btn-success {
+    background: linear-gradient(#6fbf73, #2f7d32);
+    border: none;
+}
+
+/* ===== 入力フォーム ===== */
+
+.form-control,
+.form-select {
+    background-color: #fff9e8;
+    border: 1px solid #b28c38;
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #ffd700;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+    }
+
+/* ===== メニュー一覧 ===== */
+
+.table {
+    color: #f4e7c5;
+    border-color: #8d6a35;
+}
+
+    .table thead {
+        background-color: #5c3c25;
+        color: #ffd700;
+    }
+
+    .table tbody tr {
+        background-color: #3f2d1f;
+    }
+
+        .table tbody tr:hover {
+            background-color: #60422b;
+        }
+
+/* ===== 金額表示 ===== */
+
+.price {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* ===== 注文確定メッセージ ===== */
+
+.order-success {
+    background: #29452d;
+    border: 2px solid #7fd97f;
+    color: #dfffe0;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+/* ===== 冒険者ギルド風の枠 ===== */
+
+.guild-panel {
+    background: rgba(74, 50, 32, 0.95);
+    border: 3px solid #c9a44c;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 0 20px rgba(201, 164, 76, 0.25), inset 0 0 10px rgba(255, 215, 0, 0.1);
+}
