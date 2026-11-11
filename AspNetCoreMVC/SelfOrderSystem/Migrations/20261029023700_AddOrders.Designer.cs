@@ -12,7 +12,7 @@ using SelfOrderSystem.Data;
 namespace SelfOrderSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20261029024324_AddOrders")]
+    [Migration("20261029023700_AddOrders")]
     partial class AddOrders
     {
         /// <inheritdoc />

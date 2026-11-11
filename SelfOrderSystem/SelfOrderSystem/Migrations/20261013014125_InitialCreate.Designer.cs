@@ -11,8 +11,8 @@ using SelfOrderSystem.Data;
 namespace SelfOrderSystem.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20261014011951_initialCreate")]
-    partial class initialCreate
+    [Migration("20261013014125_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

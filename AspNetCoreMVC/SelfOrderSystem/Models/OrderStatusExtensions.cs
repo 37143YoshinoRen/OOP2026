@@ -1,5 +1,4 @@
 ﻿namespace SelfOrderSystem.Models;
-
 public static class OrderStatusExtensions {
     public static string ToJapanese(this OrderStatus status) {
         return status switch {
@@ -20,5 +19,3 @@ public static class OrderStatusExtensions {
         };
     }
 }
-
-
