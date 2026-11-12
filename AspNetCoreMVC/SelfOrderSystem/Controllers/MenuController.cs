@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using SelfOrderSystem.Data;
 using SelfOrderSystem.ViewModels;
 using SelfOrderSystem.Services;
-using SelfOrderSystem.Models;
 
 namespace SelfOrderSystem.Controllers;
 public class MenuController : Controller {
@@ -47,6 +46,7 @@ public class MenuController : Controller {
             CartItemCount = cartItems.Sum(x=>x.Quantity),   //商品数量の合計
             CartTotal = cartItems.Sum(x=>x.LineTotal),      //小計の合計
         };
+        
         return View(vm);    // ViewModel をView へ渡す
     }
 }
