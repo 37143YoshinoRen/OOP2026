@@ -1,17 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore; // EF Core の非同期検索
 using SelfOrderSystem.Data; // AppDbContext
 using SelfOrderSystem.Models; // Product とOrder
+using Microsoft.AspNetCore.SignalR;
+using SelfOrderSystem.Hubs;
 
 namespace SelfOrderSystem.Services;
 
 public class OrderService : IOrderService {
 
-    private readonly AppDbContext _db; // DB 操作に使うフィールド
+    private readonly AppDbContext _db; // DB操作 
+    private readonly IHubContext<StaffOrdersHub> _hubContext; // 通知 
+    private readonly ILogger<OrderService> _logger; // ログ 
 
-    //コンストラクタ
-    public OrderService(AppDbContext db) // DI からDbContext を受け取る
-    {
-        _db = db; // 受け取ったものを保持
+    public OrderService(AppDbContext db,
+        IHubContext<StaffOrdersHub> hubContext,
+        ILogger<OrderService> logger) {
+        _db = db; // DIでDBを受け取る 
+        _hubContext = hubContext; // DIでHubを受け取る 
+        _logger = logger; // DIでログを受け取る 
     }
 
     public async Task<PlaceOrderResult> PlaceAsync(List<CartItem> cartItems, int tableNumber) {
@@ -73,10 +79,17 @@ public class OrderService : IOrderService {
         }
         _db.Orders.Add(order); // 注文と明細を保存対象に
 
-        await _db.SaveChangesAsync(); // SQL Server の保存完了を待つ
+        await _db.SaveChangesAsync(); // 注文をDBに保存 
+        result.PublicId = order.PublicId; // 保存に成功したID 
 
-        result.PublicId = order.PublicId; // 完了画面で使うID
-
-        return result; // 成功結果を返す
+        try {
+            // 店舗画面へ更新の合図を送る 
+            await _hubContext.Clients.All.SendAsync("OrdersChanged");
+        }
+        catch (Exception ex) {
+            // 通知失敗でも保存済みの注文は成功として扱う 
+            _logger.LogWarning(ex, "注文一覧への通知に失敗");
+        }
+        return result;
     }
 }
