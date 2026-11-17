@@ -27,12 +27,11 @@ public class OrdersController : Controller {
         }
         return View(new CheckoutViewModel { Items = items });
     }
-
+    
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Place(CheckoutViewModel model) {
         var cartItems = _cart.GetItems(); // Session を再取得
-        
 
         if (!ModelState.IsValid) {
             model.Items = cartItems; // 再表示用の一覧を戻す
@@ -50,6 +49,10 @@ public class OrdersController : Controller {
             model.Items = cartItems;
             return View("Checkout", model);
         }
+
+        //注文成功時のPublicIDをSeeionに保存
+        HttpContext.Session.SetString("LastOrderPublicId", result.PublicId!.Value.ToString());
+
 
         _cart.Clear(); // 保存成功後にカートを空にする
         return RedirectToAction(nameof(Complete),
@@ -71,6 +74,16 @@ public class OrdersController : Controller {
         .Include(o => o.Items)
         .ThenInclude(i => i.Product)
         .SingleOrDefaultAsync(o => o.PublicId == publicId);
+    }
+
+    //同じブラウザで最後に確定した注文を開く
+    public IActionResult MyOrder() {
+        var publicId = HttpContext.Session.GetString("LastOrderPublicId");
+
+        if(!Guid.TryParse(publicId, out var id)){
+            return RedirectToAction("Index", "Menu");
+        }
+        return RedirectToAction(nameof(Status), new { id });
     }
 
 }
