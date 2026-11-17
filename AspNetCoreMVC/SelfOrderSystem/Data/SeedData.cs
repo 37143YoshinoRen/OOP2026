@@ -42,12 +42,6 @@ public class SeedData {
             Name = "アイスコーヒー",
             Price = 380m,
             Description = "食後にもおすすめです"
-        },
-        new Product {
-            CategoryId = drink.Id,
-            Name = "ああぁあぁぁぁぁあああ！！！",
-            Price = 9999333m,
-            Description = "あああああああああああああああああああああ！"
         });
         await db.SaveChangesAsync(); // 商品を保存
 

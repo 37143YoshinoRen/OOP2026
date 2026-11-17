@@ -1,4 +1,5 @@
 ﻿namespace SelfOrderSystem.Models;
+
 public enum OrderStatus {
     New,        //新規受付
     Accepted,   //受付済み
