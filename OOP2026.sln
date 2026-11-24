@@ -191,6 +191,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SelfOrderSystem", "AspNetCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcBasicSample", "AspNetCoreMVC\MvcBasicSample\MvcBasicSample.csproj", "{542A012D-A20C-A488-FE51-1377A7AE6D7A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VideCoding", "VideCoding", "{0AE701A6-8AF6-414B-AB8A-BC79B7EBA607}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp", "VideCoding\WeatherApp\WeatherApp.csproj", "{5998E3E6-95BF-4AC9-BCD7-52C9F8B5BC7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -417,6 +421,10 @@ Global
 		{542A012D-A20C-A488-FE51-1377A7AE6D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{542A012D-A20C-A488-FE51-1377A7AE6D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{542A012D-A20C-A488-FE51-1377A7AE6D7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5998E3E6-95BF-4AC9-BCD7-52C9F8B5BC7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5998E3E6-95BF-4AC9-BCD7-52C9F8B5BC7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5998E3E6-95BF-4AC9-BCD7-52C9F8B5BC7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5998E3E6-95BF-4AC9-BCD7-52C9F8B5BC7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -498,6 +506,7 @@ Global
 		{DDC4D576-DA9D-4A5B-84A0-A5B23E397F54} = {87C9906B-FB32-461D-A45C-7BA00D4E36DA}
 		{21FAEC98-C28A-091F-FE98-54197D2ADBB2} = {2FFFA9C4-5BD2-4A3E-8A9F-92B686F366ED}
 		{542A012D-A20C-A488-FE51-1377A7AE6D7A} = {2FFFA9C4-5BD2-4A3E-8A9F-92B686F366ED}
+		{5998E3E6-95BF-4AC9-BCD7-52C9F8B5BC7C} = {0AE701A6-8AF6-414B-AB8A-BC79B7EBA607}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B5F3DCFB-7055-441A-B477-34BDE78BB845}
